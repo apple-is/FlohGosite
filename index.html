@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlohGo - Weihnachts-Website</title>
+  <style>
+    /* Grundlegende Seitenstile */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f1f8ff;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-image: url('https://www.transparenttextures.com/patterns/white-light-geometric.png');
+      background-size: cover;
+    }
+
+    /* Header-Stile */
+    header {
+      background: #9b59b6;
+      color: white;
+      padding: 40px;
+      text-align: center;
+      font-size: 2.5em;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      font-family: 'Comic Sans MS', sans-serif;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+    }
+
+    /* Allgemeine Sektionen */
+    section {
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Über mich */
+    .about {
+      background-color: #ffebcd;
+      padding: 40px;
+      margin-top: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .about h2 {
+      font-size: 2em;
+      color: #e74c3c;
+      margin-bottom: 20px;
+    }
+
+    .about p {
+      font-size: 1.2em;
+      line-height: 1.8;
+      color: #333;
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    .about p strong {
+      color: #c0392b;
+    }
+
+    /* Adventskalender */
+    .advent-calendar {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .advent-day {
+      background-color: #e74c3c;
+      color: white;
+      padding: 20px;
+      font-size: 1.8em;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .advent-day:hover {
+      transform: scale(1.1);
+      background-color: #c0392b;
+    }
+
+    .advent-day.active {
+      background-color: #16a085;
+    }
+
+    .advent-day.disabled {
+      background-color: #bdc3c7;
+      pointer-events: none;
+    }
+
+    /* Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      width: 80%;
+      max-width: 500px;
+      z-index: 1000;
+      text-align: center;
+      animation: popup 0.5s ease;
+    }
+
+    .popup.active {
+      display: block;
+    }
+
+    .popup h2 {
+      color: #2ecc71;
+      margin-bottom: 20px;
+    }
+
+    .popup .close-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .popup .close-btn:hover {
+      background-color: #c0392b;
+    }
+
+    /* Animations */
+    @keyframes popup {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    footer {
+      background: #9b59b6;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.2em;
+      box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .community {
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+
+    .community strong {
+      color: #16a085;
+    }
+
+    /* Responsives Design */
+    @media (max-width: 768px) {
+      header {
+        padding: 30px;
+      }
+
+      header h1 {
+        font-size: 2.5em;
+      }
+
+      .about {
+        padding: 30px;
+      }
+
+      .advent-calendar {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        max-width: 90%;
+      }
+
+      .advent-day {
+        font-size: 1.5em;
+        padding: 15px;
+      }
+
+      footer {
+        font-size: 1em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 20px;
+      }
+
+      header h1 {
+        font-size: 2em;
+      }
+
+      .about {
+        padding: 20px;
+      }
+
+      .advent-calendar {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+        max-width: 90%;
+      }
+
+      .advent-day {
+        font-size: 1.2em;
+        padding: 12px;
+      }
+
+      footer {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    FlohGo - Weihnachts-Website
+  </header>
+
+  <!-- Über mich -->
+  <section class="about">
+    <h2>Über mich</h2>
+    <p>Ich bin <strong>FlohGo</strong>, ein leidenschaftlicher YouTuber, der sich darauf konzentriert, coole Spiele und Roblox-Inhalte zu präsentieren! Seit 2022 bin ich aktiv und habe mittlerweile mehr als <strong>4.000 Abonnenten</strong> erreicht, mit insgesamt über <strong>1 Million Aufrufen</strong>. Ich liebe es, mit meiner Community zu interagieren und freue mich, euch immer wieder neue, spannende Inhalte zu liefern!</p>
+    <p>In meinen Videos findest du eine Mischung aus Unterhaltung, tollen Spielen und vielen Überraschungen! Besonders Roblox hat es mir angetan – die unendlichen Möglichkeiten, eigene Welten zu gestalten und mit euch zu teilen, sind einfach unglaublich! 🌟</p>
+    <p>Doch nicht nur das – ich interessiere mich auch für viele andere coole Games und versuche, meine Videos für jedes Alter und jeden Geschmack interessant zu machen. Es macht mir einfach riesigen Spaß, die Welt der Spiele zu entdecken und mit euch zu teilen. 🕹️</p>
+    <p>Ich schätze eure Unterstützung sehr und ohne euch wäre mein Kanal nicht da, wo er heute ist. Ich freue mich, jeden einzelnen von euch in meiner Community zu haben! Ihr seid die besten! ❤️</p>
+  </section>
+
+  <!-- Adventskalender -->
+  <section>
+    <h2>Öffne die Türchen des Adventskalenders!</h2>
+    <p>Klicke auf ein Türchen, um ein Überraschungsgeschenk zu entdecken!</p>
+    <div class="advent-calendar">
+      <!-- Adventskalendertürchen -->
+      <div class="advent-day" data-day="1">1</div>
+      <div class="advent-day" data-day="2">2</div>
+      <div class="advent-day" data-day="3">3</div>
+      <div class="advent-day" data-day="4">4</div>
+      <div class="advent-day" data-day="5">5</div>
+      <div class="advent-day" data-day="6">6</div>
+      <div class="advent-day" data-day="7">7</div>
+      <div class="advent-day" data-day="8">8</div>
+      <div class="advent-day" data-day="9">9</div>
+      <div class="advent-day" data-day="10">10</div>
+      <div class="advent-day" data-day="11">11</div>
+      <div class="advent-day" data-day="12">12</div>
+      <div class="advent-day" data-day="13">13</div>
+      <div class="advent-day" data-day="14">14</div>
+      <div class="advent-day" data-day="15">15</div>
+      <div class="advent-day" data-day="16">16</div>
+      <div class="advent-day" data-day="17">17</div>
+      <div class="advent-day" data-day="18">18</div>
+      <div class="advent-day" data-day="19">19</div>
+      <div class="advent-day" data-day="20">20</div>
+      <div class="advent-day" data-day="21">21</div>
+      <div class="advent-day" data-day="22">22</div>
+      <div class="advent-day" data-day="23">23</div>
+      <div class="advent-day" data-day="24">24</div>
+    </div>
+  </section>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <h2>Überraschung!</h2>
+    <p id="popup-message">Du hast Türchen <span id="popup-day"></span> geöffnet! 🎁</p>
+    <button class="close-btn" id="close-btn">Schließen</button>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 FlohGo. Alle Rechte vorbehalten.</p>
+    <div class="community">Tritt meiner <strong>Community</strong> bei!</div>
+  </footer>
+
+  <script>
+    // Sprüche für jedes Türchen
+    const messages = {
+      1: "Willkommen zum ersten Türchen! 🎅 Lass uns diesen Advent genießen!",
+      2: "Ein kleiner Gruß für den 2. Dezember: Die Weihnachtszeit ist da! ✨",
+      3: "Dritte Tür, dritte Überraschung! 🎁 Weihnachten rückt näher!",
+      4: "Das 4. Türchen öffnet sich: Möge der Weihnachtszauber beginnen! 🎄",
+      5: "Fünf Türchen – und wir sind noch lange nicht am Ende! 🎉",
+      6: "Sechster Dezember, der Spaß beginnt richtig! ⛄️",
+      7: "Hinter dem 7. Türchen wartet eine festliche Überraschung! 🎁",
+      8: "Ooh, schon der 8. Dezember! Die Magie ist überall! ✨",
+      9: "Fast die Hälfte – der 9. Dezember bringt uns noch mehr Freude! 🎅",
+      10: "Zehntes Türchen: Jeder Tag ist ein Geschenk! 🎄",
+      11: "Hier kommt Türchen 11 – Weihnachten ist so nah! 🎁",
+      12: "Hurra! Der 12. Dezember ist da! Die Freude wächst! 🎉",
+      13: "Die Zeit fliegt, aber der 13. Dezember ist immer noch magisch! ✨",
+      14: "Willkommen hinter Türchen 14 – Weihnachten ist so nah! 🎅",
+      15: "15. Türchen: Heute wird es besonders festlich! ⛄️",
+      16: "Der 16. Dezember – die Vorfreude wächst weiter! 🎄",
+      17: "17 Tage, die uns zur Weihnachtswoche führen! 🎁",
+      18: "Fast Weihnachten – Türchen 18 bringt uns noch näher! ✨",
+      19: "Nur noch wenige Tage bis Weihnachten! Die Spannung steigt! 🎅",
+      20: "Türchen 20 – Weihnachten steht vor der Tür! 🎄",
+      21: "Noch drei Tage! Weihnachten wird magisch! 🎉",
+      22: "22. Dezember – es wird immer aufregender! 🎁",
+      23: "Nur noch einen Tag bis Weihnachten – Türchen 23 bringt uns zur Magie! ✨",
+      24: "Es ist Heiligabend – das große Finale! Frohe Weihnachten! 🎄🎁"
+    };
+
+    // Adventskalender Logik
+    const adventDays = document.querySelectorAll('.advent-day');
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('close-btn');
+    const popupDay = document.getElementById('popup-day');
+    const popupMessage = document.getElementById('popup-message');
+    const today = new Date().getDate();  // Aktuellen Tag ermitteln
+
+    adventDays.forEach(day => {
+      const dayNumber = parseInt(day.getAttribute('data-day'));
+
+      // Sperrt Türchen, die noch nicht offen sind
+      if (dayNumber > today) {
+        day.classList.add('disabled');
+      }
+
+      day.addEventListener('click', () => {
+        if (!day.classList.contains('disabled') && !day.classList.contains('active')) {
+          day.classList.add('active');
+          popupDay.textContent = dayNumber;
+          popupMessage.textContent = messages[dayNumber];
+          popup.classList.add('active');
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      popup.classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>
